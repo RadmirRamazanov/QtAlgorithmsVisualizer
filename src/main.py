@@ -4,9 +4,9 @@ from PyQt6.QtCore import Qt, QUrl
 from PyQt6.QtWidgets import QApplication, QMainWindow, QLabel, QMessageBox
 from PyQt6.QtMultimediaWidgets import QVideoWidget
 from PyQt6.QtMultimedia import QMediaPlayer
-from DbManager import DatabaseManager
-from ExportManager import ExportManager
-from design import Ui_MainWindow
+from modules.DbManager import DatabaseManager
+from modules.ExportManager import ExportManager
+from modules.design import Ui_MainWindow
 
 
 class BackgroundManager:
@@ -23,18 +23,18 @@ class BackgroundManager:
 
     def set_default_background(self, parent):
         self.background_label.setPixmap(
-            QPixmap("dark-abstract-background-black-overlap-free.jpg").scaled(
+            QPixmap("content/pictures/dark-abstract-background-black-overlap-free.jpg").scaled(
                 parent.width(), parent.height(),
                 Qt.AspectRatioMode.IgnoreAspectRatio))
 
     def toggle_background(self, parent):
         if self.counter % 2 == 0:
-            self.background_label.setPixmap(QPixmap("dark_back1.jpg").scaled(
+            self.background_label.setPixmap(QPixmap("content/pictures/dark_back1.jpg").scaled(
                 parent.width(), parent.height(),
                 Qt.AspectRatioMode.IgnoreAspectRatio))
         else:
             self.background_label.setPixmap(
-                QPixmap("dark-abstract-background-black-overlap-free.jpg").scaled(
+                QPixmap("content/pictures/dark-abstract-background-black-overlap-free.jpg").scaled(
                 parent.width(), parent.height(),
                 Qt.AspectRatioMode.IgnoreAspectRatio))
         self.counter += 1
@@ -110,6 +110,7 @@ class QtAlgorithmVisualizer(QMainWindow, Ui_MainWindow):
         result = self.db_manager.get_algorithm_info(algorithm_name)
         self.textEdit_2.setText(result[0])
         self.time.setText(f"Временная сложность: {result[1]}")
+        print(result)
         self.video_player.setup_video(result[2])
 
     def update_info(self):

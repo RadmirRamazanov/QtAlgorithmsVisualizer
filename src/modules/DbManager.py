@@ -12,7 +12,7 @@ class DatabaseManager:
     Отвечает за подключение к бд, выполнению запросов
     """
     def __init__(self):
-        self.con = sqlite3.connect("algo.sqlite")
+        self.con = sqlite3.connect("data/algo.sqlite")
 
     def get_algorithm_info(self, algorithm_name):
         return self.con.cursor().execute(
